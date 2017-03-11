@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <?php include('../common/style.html')?>
+    <link rel="stylesheet" href="/lib/bootstrap-datepicker/css/bootstrap-datepicker3.css"/>
+
+</head>
+<body>
+    
+    <!-- 侧边栏 -->
+    <?php include('../common/aside.html')?>
+    <!-- 主体 -->
+    <div class="main">
+        <div class="container-fluid">
+            <!-- 头部 -->
+            <?php include('../common/header.html')?>
+            <div class="body teacher">
+                <!-- 面包屑 -->
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">讲师管理</a></li>
+                    <li class="active">讲师添加</li>
+                </ol>
+                <div class="teacher-add">
+              <!-- 模板的坑-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 讲师添加与编辑表单模版 -->
+    <!--<script id="teacher-form-tpl" type="text/tpl">-->
+    	<!--<form id="teacher-add-form" action="" class="form-horizontal col-xs-offset-2">-->
+            <!--<div class="form-group">-->
+                <!--<label for="" class="col-xs-3 control-label">姓名</label>-->
+                <!--<div class="col-xs-4">-->
+                    <!--<input name="tc_name" value="{{ tc_name }}" type="text" class="form-control input-sm" placeholder="讲师名称">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--{{ if !tc_id }}-->
+            <!--&lt;!&ndash; 如果是添加新讲师，需要该密码输入框；如果是修改讲师信息，则不需要该密码输入框 &ndash;&gt;-->
+            <!--<div class="form-group">-->
+                <!--<label for="" class="col-xs-3 control-label">密码</label>-->
+                <!--<div class="col-xs-4">-->
+                    <!--<input name="tc_pass" type="password" class="form-control input-sm">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--{{ /if }}-->
+            <!--<div class="form-group">-->
+                <!--<label for="" class="col-xs-3 control-label">入职时间</label>-->
+                <!--<div class="col-xs-4">-->
+                    <!--<input id="datepicter" name="tc_join_date" value="{{ tc_join_date }}" type="text" class="form-control input-sm">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label for="" class="col-xs-3 control-label">类型</label>-->
+                <!--<div class="col-xs-2">-->
+                    <!--<select name="tc_type" class="form-control input-sm">-->
+                        <!--<option value="1" {{ tc_type == 1? 'selected': '' }} >讲师</option>-->
+                        <!--<option value="0" {{ tc_type == 0? 'selected': '' }}>管理员</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label for="" class="col-xs-3 control-label">性别</label>-->
+                <!--<div class="col-xs-4">-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input name="tc_gender" value="0" type="radio" {{ tc_gender == 0? 'checked': '' }}> 男-->
+                    <!--</label>-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input name="tc_gender" value="1"  type="radio" {{ tc_gender == 1? 'checked': '' }}> 女-->
+                    <!--</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<div class="col-xs-7">-->
+                    <!--<button type="submit" class="btn btn-success btn-sm pull-right">{{ tc_id? '编辑': '添加' }}</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</script>-->
+
+
+     <script type="text/template" id='teacher-form-tpl'>
+         <form action="" class="form-horizontal col-xs-offset-2" id='teacher_add_form'>
+             <div class="form-group">
+                 <label for="" class="col-xs-3 control-label">姓名</label>
+                 <div class="col-xs-4">
+                     <input type="text" name='tc_name' value="{{ tc_name }}" class="form-control input-sm" placeholder="讲师名称">
+                 </div>
+             </div>
+             {{ if !tc_id }}
+             <div class="form-group">
+                 <label for="" class="col-xs-3 control-label">密码</label>
+                 <div class="col-xs-4">
+                     <input type="password" name='tc_pass' class="form-control input-sm">
+                 </div>
+             </div>
+             {{ /if }}
+             <div class="form-group">
+                 <label for="" class="col-xs-3 control-label">入职时间</label>
+                 <div class="col-xs-4">
+                     <input type="text" value="{{tc_join_date}}" name='tc_join_date' class="form-control input-sm datepicker">
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label for="" class="col-xs-3 control-label">类型</label>
+                 <div class="col-xs-2">
+                     <select name="tc_type" class="form-control input-sm">
+                         <option value="1" {{tc_type==1?'selected':''}}>讲师</option>
+                         <option value="0" {{tc_type==0?'selected':''}}>管理员</option>
+                     </select>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label for="" class="col-xs-3 control-label">性别</label>
+                 <div class="col-xs-4">
+                     <label class="radio-inline">
+                         <input type="radio" checked name='tc_gender' value="0" {{tc_gender==0?'selected':''}}> 男
+                     </label>
+                     <label class="radio-inline">
+                         <input type="radio" name='tc_gender'  value="1" {{tc_gender==1?'selected':''}}> 女
+                     </label>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <div class="col-xs-7">
+                     <button type='submit' class="btn btn-success btn-sm pull-right">{{tc_id?'编辑':'添加'}} </button>
+                 </div>
+             </div>
+         </form>
+       </script>
+
+
+    <?php include('../common/script.html')?>
+</body>
+</html>

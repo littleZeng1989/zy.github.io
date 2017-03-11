@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <?php include('../common/style.html')?>
+</head>
+<body>
+
+<!-- 侧边栏 -->
+<?php include('../common/aside.html')?>
+<!-- 主体 -->
+<div class="main">
+    <div class="container-fluid">
+        <!-- 头部 -->
+        <?php include('../common/header.html')?>
+        <div class="body course-add">
+            <!-- 面包屑 -->
+            <ol class="breadcrumb">
+                <li><a href="javascript:;">课程管理</a></li>
+                <li class="active">课程添加</li>
+            </ol>
+            <div class="steps">
+             <!-- 添加课程第一步的坑-->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/template" id='add-step1-tpl'>
+    <!-- 摘要 -->
+    <?php include('../common/course/course-step-top.html')?>
+    <!-- 步聚 -->
+    <?php include('../common/course/course-step-aside.html')?>
+    <!-- 基本信息 -->
+    <div class="content">
+        <!-- 标题 -->
+        <div class="title">
+            <h5>基本信息
+                <small>BASIC INFORMATION</small>
+            </h5>
+        </div>
+        <form action="" class="basic form-horizontal" id='step1-add-form'>
+            <div class="form-group">
+                <label for="" class="col-xs-2 control-label">标题</label>
+                <div class="col-xs-8">
+                    <input type="text" class="form-control input-sm" name='cs_name' value="{{cs_name}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-2 control-label">课程描述</label>
+                <div class="col-xs-8 ckeditor">
+                    <textarea name="cs_brief" rows="15" class="form-control input-sm" id='ckeditor'>
+                        {{#cs_brief}}
+                    </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-2 control-label">讲师</label>
+
+                <div class="col-xs-8">
+                    <select name="cs_tc_id" class="form-control input-sm">
+                        {{each teacher as value}}
+                        <option value="{{cs_tc_id}}" {{cs_tc_id==value.tc_id?'selected':''}}>{{value.tc_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-2 control-label">分类</label>
+                <div class="col-xs-8">
+                    <!-- 顶级分类-->
+                    <select  class="form-control input-sm" id='top-category'>
+                        {{each category.top as value}}
+                        <option value="{{value.cg_id}}" {{cs_cg_pid==value.cg_id?'selected':''}}>{{value.cg_name}}</option>
+                        {{/each}}
+                    </select>
+                    <!-- 子集分类-->
+                    <select name='cs_cg_id' class="form-control input-sm" id='child-category'>
+                        {{each category.childs as value}}
+                        <option value="{{value.cg_id}}" {{cs_cg_id==value.cg_id?'selected':''}}>{{value.cg_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-2 control-label">标签</label>
+                <div class="col-xs-8">
+                    <input type="text" class="form-control input-sm" name='cs_tags' value="{{cs_tags}}">
+                    <p class="help-block">将会应用于按标签搜索课程、相关课程的提取等</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-10">
+                    <button type="submit" class="btn btn-success btn-sm pull-right">保 存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</script>
+<?php include('../common/script.html')?>
+</body>
+</html>
